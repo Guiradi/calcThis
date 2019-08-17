@@ -1,10 +1,24 @@
-import Home from './views/Home.vue'
+// Home
+import Home from '../views/Home';
+
+// Main
+import Main from "../views/Main";
 
 export default [
     {
       path: '/',
-      name: 'home',
+      name: 'Home',
       component: Home
+    },
+    {
+      path: '/calc',
+      name: 'Main',
+      component: Main
+    },
+    {
+      path: "*",
+      name: "404",
+      redirect: "/"
     }
     // {
     //   path: "/",
