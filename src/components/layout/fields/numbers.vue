@@ -12,7 +12,7 @@
     </v-row>
     <v-row class="px-1">
         <v-col class="text-center">
-            <v-card class="py-2" @click="$emit('input', ',')">
+            <v-card class="py-2" @click="$emit('input', '.')">
                 ,
             </v-card>
         </v-col>

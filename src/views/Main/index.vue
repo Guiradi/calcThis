@@ -1,17 +1,17 @@
 <template>
     <v-container fluid fill-height>
-        <app-derivative-calculator />
+        <app-common-calculator />
     </v-container>
 </template>
 
 <script>
-import AppDerivativeCalculator from "../../components/calculators/derivative";
+import AppCommonCalculator from "../../components/calculators/common";
 
 export default {
     name: "MainApp",
 
     components: {
-        AppDerivativeCalculator
+        AppCommonCalculator
     }
 }
 </script>

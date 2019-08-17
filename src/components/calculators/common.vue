@@ -17,7 +17,7 @@
                         </v-col>
 
                         <v-col>
-                            {{ functionInput }}
+                            <app-buttons v-model="numberInput" @calculate="_calculate" />
                         </v-col>
                     </v-row>
 
@@ -29,16 +29,26 @@
 </template>
 
 <script>
+// Services
+import calculate from "../../services/commonCalc";
+
+// Components
 import AppNumberFields from "../layout/fields/numbers";
+import AppButtons from "../layout/fields/buttons";
 import AppCalculatorOutput from "../layout/fields/calculatorOutput";
 
 export default {
-    name: "DerivativeCalculator",
+    name: "CommonCalculator",
 
     components: {
+        AppButtons,
         AppNumberFields,
         AppCalculatorOutput
     },
+    
+    data: () => ({
+        functionInput: ''
+    }),
 
     computed: {
         numberInput: {
@@ -51,10 +61,18 @@ export default {
             }
         }
     },
-    
-    data: () => ({
-        functionInput: ''
-    })
+
+    methods: {
+        _calculate() {
+            try {
+                const result = calculate(this.functionInput);
+                this.functionInput = result;
+            } catch (error) {
+                this.functionInput = 0;
+                alert(error);
+            }
+        }
+    }
 }
 </script>
 

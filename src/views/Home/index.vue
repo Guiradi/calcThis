@@ -23,11 +23,13 @@
                             <v-card
                                 :elevation="hover ? 12 : 2"
                                 class="mx-auto"
-                                color="primary"
+                                :color="calculatorsList[0].color"
                                 height="20vh"
                                 :to="{ name: 'Main' }"
                             >
-                            <v-card-title class="align-end fill-height">Calculadora de derivadas</v-card-title>
+                            <v-card-title class="align-end fill-height">
+                                {{ calculatorsList[0].text }}
+                            </v-card-title>
                             </v-card>
                         </v-hover>
                     </v-col>
@@ -106,11 +108,14 @@
 </template>
 
 <script>
+import calculatorsList from "../../utils/lists/calculators";
+
 export default {
     name: "Home",
     
     data: () => ({
-        menu: false
+        menu: false,
+        calculatorsList
     })
 }
 </script>
