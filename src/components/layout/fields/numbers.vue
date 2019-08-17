@@ -10,6 +10,23 @@
             </v-card>
         </v-col>
     </v-row>
+    <v-row class="px-1">
+        <v-col class="text-center">
+            <v-card class="py-2" @click="$emit('input', ',')">
+                ,
+            </v-card>
+        </v-col>
+        <v-col class="text-center">
+            <v-card class="py-2" @click="$emit('input', 0)">
+                0
+            </v-card>
+        </v-col>
+        <v-col class="text-center">
+            <v-card class="py-2" @click="$emit('input', '000')">
+                000
+            </v-card>
+        </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -20,7 +37,7 @@ export default {
     props: {
         value: {
             required: true,
-            default: Number
+            default: String
         }
     },
 
