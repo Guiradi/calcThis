@@ -25,7 +25,7 @@
                                 class="mx-auto"
                                 :color="calculatorsList[0].color"
                                 height="20vh"
-                                :to="{ name: 'Main' }"
+                                @click="openCalc(0)"
                             >
                             <v-card-title class="align-end fill-height">
                                 {{ calculatorsList[0].text }}
@@ -34,12 +34,19 @@
                         </v-hover>
                     </v-col>
                     <v-col>
-                        <v-card
-                            class="pa-2"
-                            height="20vh"
-                        >
-                        <v-card-title class="align-end fill-height">Em breve</v-card-title>
-                        </v-card>
+                        <v-hover v-slot:default="{ hover }" class="mouse-pointer">
+                            <v-card
+                                :elevation="hover ? 12 : 2"
+                                class="mx-auto"
+                                :color="calculatorsList[1].color"
+                                height="20vh"
+                                @click="openCalc(1)"
+                            >
+                            <v-card-title class="align-end fill-height">
+                                {{ calculatorsList[1].text }}
+                            </v-card-title>
+                            </v-card>
+                        </v-hover>
                     </v-col>
                     <v-col>
                         <v-card
@@ -116,7 +123,14 @@ export default {
     data: () => ({
         menu: false,
         calculatorsList
-    })
+    }),
+
+    methods: {
+        openCalc(index) {
+            this.$store.dispatch("setCurrentCalc", calculatorsList[index]);
+            this.$router.push({ name: 'Main' });
+        }
+    }
 }
 </script>
 
