@@ -18,11 +18,19 @@
                     </v-row>
 
                     <v-row>
-                        {{ sample }}
+                        Dados: {{ sample }}
                     </v-row>
 
                     <v-row>
                         Média Aritmética: {{ arithmeticMean }}
+                    </v-row>
+
+                    <v-row>
+                        Variância: {{ variance }}
+                    </v-row>
+
+                    <v-row>
+                        Desvio padrão: {{ Math.sqrt(variance) }}
                     </v-row>
 
                 </v-card-text>
@@ -43,34 +51,39 @@ export default {
             v => (!isNaN(v.replace(",", "."))) 
                 || 'O dado inserido precisa ser um número'
         ],
-        newData: "0",
+        newData: "",
         sample: []
     }),
 
     computed: {
         outerIconCheck() {
-            return this.newData 
-                && !isNaN(this.newData.replace(",", ".")) 
-                && this.newData !== "0" ? "mdi-plus" : "";
+            return this.newData && !isNaN(this.newData.replace(",", ".")) 
+                ? "mdi-plus" : "";
         },
 
         arithmeticMean() {
             if (_isEmpty(this.sample)) return 0;
             const average = this.sample.reduce((a,b) => a += b) / this.sample.length;
             return average.toFixed(2);
+        },
+
+        variance() {
+            if (_isEmpty(this.sample)) return 0;
+            const squares = this.sample.map(xi => Math.pow((xi - this.arithmeticMean), 2));
+            const squaresSum = squares.reduce((sum, xVar) => sum += xVar);
+            const floatVariance = squaresSum / this.sample.length;
+            return floatVariance.toFixed(2);
         }
     },
 
     methods: {
         addData() {
             this.sample.push(parseFloat(this.newData.replace(",", ".")));
-            this.newData = "0";
+            this.newData = "";
         },
 
         addCheck() {
-            if (this.newData 
-                && !isNaN(this.newData.replace(",", ".")) 
-                && this.newData !== "0")
+            if (this.newData && !isNaN(this.newData.replace(",", ".")))
                 this.addData();
         }
     }
